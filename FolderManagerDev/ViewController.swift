@@ -40,8 +40,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
         ac.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action: UIAlertAction) in
-            
+            if let name = ac.textFields!.first!.text {
+                if !name.isEmpty {
+                    if (self.folderManager.createDirectory(name: name) != nil) {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
         }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(ac, animated: true, completion: nil)
     }
     
     @IBAction func goUp(_ sender: Any) {
@@ -78,6 +86,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             folderManager.goToChild(url: url)
         } else {
             print((folderManager.getChilds().1)[indexPath.row].path)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            //delete dir
+        } else {
+            //delete file
         }
     }
 }

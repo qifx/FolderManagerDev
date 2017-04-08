@@ -374,6 +374,7 @@
 				8E8DADE21E98C195004A415B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
